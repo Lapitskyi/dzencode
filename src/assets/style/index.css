@@ -1,0 +1,23 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "App.scss";
+
+/*:root {}*/
+body {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    font-size: 12px;
+    line-height: 1;
+    color: #000000;
+    background: #ffffff;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+}
+

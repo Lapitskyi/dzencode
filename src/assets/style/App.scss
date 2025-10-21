@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  max-width: 1940px;
+  margin: 0 auto;
+  padding: 0 10px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.shadow-right {
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.shadow-bottom {
+  box-shadow: -5px 3px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.nav-active{
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: #66b814;
+  }
+}
+
+.select{
+  width: 250px;
+}
