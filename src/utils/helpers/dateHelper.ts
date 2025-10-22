@@ -7,7 +7,7 @@ export const dayWeek =():string=>{
 
 //  "21 Окт, 2025"
 export const formatDateShort = (str:string) => {
-    const formattedDate =  str ? new Date(str) : new Date();;
+    const formattedDate =  str ? new Date(str) : new Date();
     return `${formattedDate.getDate().toString().padStart(2, "0")} ${formattedDate.toLocaleString("en-US", { month: "short" })} ${formattedDate.getFullYear()}`;
 };
 

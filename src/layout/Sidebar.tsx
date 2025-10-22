@@ -10,7 +10,7 @@ const Sidebar = () => {
             <div style={{width: "max-content"}}
                  className='position-relative m-auto d-flex flex-column align-items-center justify-content-center'>
                 <User size={40} background='#333333'/>
-                <Settings size={12} className='position-absolute bottom-0 end-0' background='white' color='#333333'/>
+                <Settings size={12} className='position-absolute bottom-0 end-0' background='#FFFFFF' color='#333333'/>
             </div>
 
             <nav className="mt-5 d-flex flex-column justify-content-center align-items-center gap-4 text-uppercase ">
