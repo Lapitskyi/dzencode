@@ -1,6 +1,6 @@
 import React from "react";
 
-type Option ={
+type Option = {
     value: string | number;
     label: string;
 }
@@ -11,19 +11,22 @@ type SelectProps = {
     onChange?: (value: string | number) => void;
     placeholder?: string;
     className?: string;
+    disabled?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
-                                                  options,
-                                                  value,
-                                                  onChange,
-                                                  placeholder = "...",
-                                                  className = "",
-                                              }) => {
+                                           options,
+                                           value,
+                                           onChange,
+                                           placeholder = "...",
+                                           className = "",
+                                           disabled
+                                       }) => {
     return (
         <select
             className={`form-select ${className}`}
             value={value}
+            disabled={disabled}
             onChange={(e) => onChange && onChange(e.target.value)}
         >
             {placeholder && (

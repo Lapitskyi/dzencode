@@ -1,0 +1,15 @@
+$widths: 8, 10, 12, 16, 20, 25, 30,  40,50,  66,75, 100, 150, 200,250;
+$heights: 8, 10, 12, 16, 20, 25, 30, 40, 50, 66, 75, 100,150, 200, 250;
+
+
+@each $w in $widths {
+  .custom-w-#{$w} {
+    width: #{$w}px !important;
+  }
+}
+
+@each $h in $heights {
+  .custom-h-#{$h} {
+    height: #{$h}px !important;
+  }
+}

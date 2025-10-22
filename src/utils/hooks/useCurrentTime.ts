@@ -9,12 +9,12 @@ export function useCurrentTime() {
     }, []);
 
     const weekDay = time
-        .toLocaleDateString("ru-RU", { weekday: "long" })
+        .toLocaleDateString("en-US", { weekday: "long" })
         .replace(/^./, (c) => c.toUpperCase());
 
-    const currentDay = `${time.getDate().toString().padStart(2, "0")} ${time.toLocaleString("ru-RU", { month: "short" })} ${time.getFullYear()}`;
+    const currentDay = `${time.getDate().toString().padStart(2, "0")} ${time.toLocaleString("en-US", { month: "short" })} ${time.getFullYear()}`;
 
-    const currentTime =time.toLocaleTimeString("ru-RU", { hour12: false, hour: "2-digit", minute: "2-digit" })
+    const currentTime =time.toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit" })
 
     return {
         weekDay,

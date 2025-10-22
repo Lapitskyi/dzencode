@@ -18,3 +18,14 @@ export interface IProducts{
     order: number,
     date: string
 }
+
+
+
+
+export interface IOrder {
+    id: number,
+    title: string,
+    date: string,
+    description: string,
+    products: IProducts[]
+}

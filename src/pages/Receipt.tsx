@@ -1,19 +1,55 @@
 import Select from "../components/Select.tsx";
-import {useEffect, useState} from "react";
-import {useFetchProducts, useProducts} from "../store/selectors/productsSelector.ts";
+import {useEffect, useMemo, useState} from "react";
+import {useDeleteProduct, useFetchProducts, useProducts} from "../store/selectors/productsSelector.ts";
 import type {IProducts} from "../types/IProducts.ts";
+import CardProduct from "../components/CardProduct.tsx";
 
-const options = [
-    {value: 1, label: "One"},
-    {value: 2, label: "Two"},
-    {value: 3, label: "Three"},
-];
 
 const Receipt = () => {
-    const [typeProduct, setTypeProduct] = useState<string>('one');
-    const [specificationProduct, setSpecificationProduct] = useState<string>('one');
+
     const products: IProducts[] = useProducts();
     const getProducts = useFetchProducts();
+    const productDelete = useDeleteProduct();
+
+    const [typeProduct, setTypeProduct] = useState<string>('all');
+    const [specificationProduct, setSpecificationProduct] = useState<string>('all');
+
+    const uniqueTypes = useMemo(() => {
+        return ['all', ...new Set(products.map(item => item.type))]
+    }, [products]);
+
+    const uniqueSpecification = useMemo(() => {
+        return typeProduct !== 'all'
+            ? ['all', ...new Set(products
+                ?.filter(item => item.type.toLowerCase() === typeProduct.toLowerCase())
+                .map(s => s.specification))] : []
+    }, [typeProduct, products])
+
+    const filterProduct = useMemo(() => {
+
+        const result = products?.filter(item => item.type.toLowerCase() === typeProduct.toLowerCase())
+
+        if (typeProduct !== 'all' && specificationProduct === 'all' && result.length > 0) {
+            return result
+        }
+        if (typeProduct !== 'all' && specificationProduct !== 'all' && result.length > 0) {
+            return result.filter(
+                (product) =>
+                    product.specification.toLowerCase() === specificationProduct.toLowerCase()
+            );
+        }
+
+        return products
+    }, [typeProduct, specificationProduct, products])
+
+    const deleteProduct = (id: number) => {
+        productDelete(id)
+        setSpecificationProduct('all')
+    }
+
+    useEffect(() => {
+        setSpecificationProduct('all')
+    }, [typeProduct])
 
     useEffect(() => {
         getProducts()
@@ -28,7 +64,7 @@ const Receipt = () => {
                         <div>Type</div>
                         <Select
                             className='select'
-                            options={options}
+                            options={uniqueTypes.map(item => ({value: item.toString(), label: item.toString()}))}
                             value={typeProduct}
                             onChange={(val) => setTypeProduct(String(val))}
                         />
@@ -36,21 +72,35 @@ const Receipt = () => {
                     <div className='d-flex align-items-center gap-2'>
                         <div>Specification</div>
                         <Select
-                            className='select'
-                            options={options}
+                            className='custom-w-250'
+                            disabled={typeProduct === 'all'}
+                            options={uniqueSpecification.map(item => ({
+                                value: item.toString(),
+                                label: item.toString()
+                            }))}
                             value={specificationProduct}
-                            onChange={(val) => setSpecificationProduct(String(val))}
+                            onChange={(val) => {
+                                console.log('value', val)
+                                setSpecificationProduct(String(val))
+                            }
+                            }
                         />
                     </div>
                 </div>
             </div>
 
-
-            <div>
-                {products.map((product) => (
-                    <div key={product.id}> {product.title}</div>
-                ))}
+            <div className="product-list-scroll w-100">
+                <div className="d-flex flex-wrap gap-3">
+                    {filterProduct?.map((product) => (
+                        < CardProduct
+                            key={product.id}
+                            product={product}
+                            deleteProduct={() => deleteProduct(product.id)}
+                        />
+                    ))}
+                </div>
             </div>
+
         </div>
     )
 }
