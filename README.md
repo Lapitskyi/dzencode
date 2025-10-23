@@ -28,8 +28,9 @@ The app simulates backend interaction using mock data and `axios` requests.
 
 ## ⚙️ Installation
 
-# Docker
+## 1. Docker
 
+```bash
 # Build Docker image
 docker build -t dzencode .
 
@@ -40,10 +41,12 @@ docker run -d --name dzencode -p 8080:80 dzencode
 docker stop dzencode
 docker rm dzencode
 
-- Access the app: http://localhost:8080
-- If port 8080 is busy, use another port, e.g.: -p 3000:80
-- Node version in container: Node 20 (recommended to match local dev environment)
+# Access the app: http://localhost:8080
+# If port 8080 is busy, use another port, e.g.: -p 3000:80
+# Node version in container: Node 20 (recommended to match local dev environment)
+```
 
+## 2. Clone
 
 ```bash
 # Clone the repository
@@ -63,5 +66,6 @@ npm run build
 
 # Preview production build
 npm run preview
+```
 
 
