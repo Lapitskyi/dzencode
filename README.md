@@ -46,7 +46,19 @@ docker rm dzencode
 # Node version in container: Node 20 (recommended to match local dev environment)
 ```
 
-## 2. Clone
+## 2. Docker Compose
+
+```bash
+# Run all services defined in docker-compose.yml
+docker compose up -d
+
+# Stop services
+docker compose down
+
+# Access the app: http://localhost:8080
+```
+
+## 3. Clone
 
 ```bash
 # Clone the repository
