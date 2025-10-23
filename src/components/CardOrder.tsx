@@ -14,7 +14,7 @@ type CardOrderProps = {
 const CardOrder: FC<CardOrderProps> = ({order, currentOrder, setCurrentOrder}) => {
     return (
         <div
-            className='d-flex align-items-center w-100 gap-3 py-2 pe-4 ps-2 border flex-fill position-relative'
+            className='d-flex align-items-center w-100 gap-3 py-2 pe-4 ps-2 border flex-fill position-relative cursor-pointer'
             onClick={() => setCurrentOrder()}
         >
             <List
@@ -26,7 +26,7 @@ const CardOrder: FC<CardOrderProps> = ({order, currentOrder, setCurrentOrder}) =
                 <div className='fs-6 text-muted'>{order.products?.length || 0}</div>
                 <div> Products</div>
             </div>
-            <div className='d-flex flex-column align-items-start text-muted'>
+            <div className='d-flex flex-column align-items-start text-muted flex-fill'>
                 <div>{formatTime(order.date)}</div>
                 <div>{formatDateShort(order.date)}</div>
             </div>

@@ -24,7 +24,7 @@ const Select: React.FC<SelectProps> = ({
                                        }) => {
     return (
         <select
-            className={`form-select ${className}`}
+            className={`form-select  ${className}`}
             value={value}
             disabled={disabled}
             onChange={(e) => onChange && onChange(e.target.value)}

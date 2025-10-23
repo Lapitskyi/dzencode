@@ -56,11 +56,11 @@ const Receipt = () => {
     }, [])
 
     return (
-        <div className='d-flex flex-column justify-content-center align-items-start gap-5 p-5'>
-            <div className='d-flex justify-content-start align-items-center gap-5'>
-                <h2>Products <span>  / 25</span></h2>
-                <div className='d-flex align-items-start  gap-5'>
-                    <div className='d-flex align-items-center gap-2'>
+        <div className='d-flex flex-column justify-content-center align-items-start gap-3 gap-xl-5 py-3 py-xl-5 px-2 px-xl-5'>
+            <div className='d-flex flex-column  flex-lg-row justify-content-start  align-items-center gap-3 gap-xl-5 w-100'>
+                <h2 className='w-100 ms-auto'>Products <span>  / 25</span></h2>
+                <div className='d-flex flex-column flex-md-row align-items-end align-items-md-start gap-2  gap-md-5'>
+                    <div className='d-flex  align-items-center gap-2'>
                         <div>Type</div>
                         <Select
                             className='select'

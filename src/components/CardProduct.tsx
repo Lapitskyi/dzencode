@@ -7,9 +7,10 @@ import Modal from "./Modal.tsx";
 type CardProductProps = {
     product: IProducts,
     deleteProduct: () => void,
+    shorCard?: boolean,
 }
 
-const CardProduct: FC<CardProductProps> = ({product, deleteProduct}) => {
+const CardProduct: FC<CardProductProps> = ({product, deleteProduct, shorCard = false}) => {
     const [open, setOpen] = useState<boolean>(false)
 
     const deleteEl = () => {
@@ -27,39 +28,44 @@ const CardProduct: FC<CardProductProps> = ({product, deleteProduct}) => {
                 alt="photo"
             />
             <div
-                className='custom-w-250 d-flex flex-column align-self-start align-items-start gap-1 text-muted truncate-single'>
+                className='custom-w-250 w-custom-auto d-flex flex-column align-self-start align-items-start gap-1 text-muted truncate-single'>
                 <div>
                     {product.title}
                 </div>
                 <div>{product.serialNumber}</div>
             </div>
+            {!shorCard
+                ? <>
+                    <div className='text-muted d-md-block d-none custom-w-70 text-end gap-2 text-nowrap'>
+                        <div>
+                            from {formatDateShort(product.guarantee.start)}
+                        </div>
+                        <div>
+                            to {formatDateShort(product.guarantee.end)}
+                        </div>
+                    </div>
+                    <div className='d-sm-block d-none'>{product?.isNew ? 'new' : 'used'}</div>
+                    <div className='text-muted custom-w-70 text-start text-nowrap'>
+                        {product.price.map((p) => (
+                            <div key={p.symbol}>{p.value}{p.symbol}</div>
+                        ))}
+                    </div>
+                    <div className='d-sm-flex d-none truncate-multi align-self-start custom-w-250 w-custom-auto'>
+                        {product.specification}
+                    </div>
 
-            <div className='text-muted custom-w-70 text-end gap-2 text-nowrap'>
-                <div>
-                    from {formatDateShort(product.guarantee.start)}
-                </div>
-                <div>
-                    to {formatDateShort(product.guarantee.end)}
-                </div>
-            </div>
-            <div>{product?.isNew ? 'new' : 'used'}</div>
-            <div className='text-muted custom-w-70 text-start text-nowrap'>
-                {product.price.map((p) => (
-                    <div key={p.symbol}>{p.value}{p.symbol}</div>
-                ))}
-            </div>
-            <div className='truncate-multi align-self-start custom-w-250'>
-                {product.specification}
-            </div>
+                    <div className='d-md-block d-none text-start custom-w-70 text-nowrap'>
+                        {formatDateShort(product.date)}
+                    </div>
+                </>
+                : null
+            }
 
-            <div className='text-start custom-w-70 text-nowrap'>
-                {formatDateShort(product.date)}
-            </div>
 
             <Delete
                 role="button"
                 onClick={() => setOpen(true)}
-                className='d-flex align-self-center justify-content-center p-3 '
+                className='d-flex align-self-center justify-content-center p-3 ms-auto '
                 size={12}
                 color='gray'
             />
@@ -101,7 +107,7 @@ const CardProduct: FC<CardProductProps> = ({product, deleteProduct}) => {
                             alt="photo"
                         />
                         <div
-                            className='custom-w-250 d-flex flex-column align-self-start align-items-start gap-1 text-muted truncate-single'>
+                            className='d-flex flex-column align-self-start align-items-start gap-1 text-muted truncate-single'>
                             <div>
                                 {product.title}
                             </div>

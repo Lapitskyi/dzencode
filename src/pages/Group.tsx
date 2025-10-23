@@ -38,8 +38,8 @@ const Group = () => {
     }, [])
 
     return (
-        <div className="d-flex w-100 align-items-start gap-4 p-4">
-            <div className='d-flex flex-column gap-2 col-3 '>
+        <div className="d-flex flex-lg-row flex-column w-100 align-items-start gap-4 p-2 p-md-4">
+            <div className='d-flex flex-column gap-2 col-12  col-lg-4'>
                 {orders?.map((order) => (
                     order.products?.length ? <CardOrder
                         key={order.id}
@@ -51,7 +51,7 @@ const Group = () => {
             </div>
             {currentOrder &&
                 <div
-                    className='d-flex flex-column w-100 col-9 gap-2 p-2 border flex-fill position-relative '
+                    className='d-flex flex-column  col-12  col-lg-5 gap-2 p-2 border  position-relative '
                 >
                     <Cross
                         onClick={() => setCurrentOrder(undefined)}
@@ -64,6 +64,7 @@ const Group = () => {
                         {currentOrder.products.map((product) => (
                             < CardProduct
                                 key={product.id}
+                                shorCard
                                 product={product}
                                 deleteProduct={() => deleteProduct(currentOrder.id, product.id)}
                             />

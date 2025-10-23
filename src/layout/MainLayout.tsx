@@ -1,34 +1,26 @@
-import {Suspense} from "react";
-import {Outlet} from "react-router-dom";
-import Header from "./Header.tsx";
-import Sidebar from "./Sidebar.tsx";
+import React, { useState, Suspense } from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
-
-const MainLayout = () => {
+const MainLayout: React.FC = () => {
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="w-100 vh-100 d-flex flex-column p-0">
-            <Header/>
+        <div className="w-100 vh-100 d-flex flex-column">
+            <Header onToggleSidebar={() => setSidebarOpen((s) => !s)} />
 
-            <div className="w-100 h-100 d-flex justify-content-center m-auto flex-grow-1">
-                <div className="container">
-                    <div className="w-100 h-100 d-flex justify-content-center">
-                        <Sidebar />
-                        <main className="col-md-9 bg-white order-md-2 order-1">
-                            <Suspense fallback={<div style={{textAlign: "center"}}>Loading page...</div>}>
-                                <Outlet/>
-                            </Suspense>
-                        </main>
-                    </div>
+            <div className="container flex-grow-1 d-flex p-0">
+                <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-                </div>
-
-                </div>
-
-
+                <main className="col-md-9 flex-grow-1 bg-white p-0">
+                    <Suspense fallback={<div className="text-center">Loading...</div>}>
+                        <Outlet />
+                    </Suspense>
+                </main>
+            </div>
         </div>
-    )
-}
-
+    );
+};
 
 export default MainLayout;
